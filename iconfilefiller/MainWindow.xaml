@@ -7,7 +7,8 @@
         WindowStartupLocation="CenterScreen"
         AllowDrop="True"
         DragOver="Window_DragOver"
-        Drop="Window_Drop">
+        Drop="Window_Drop"
+        Icon="appicon.ico">
 
     <Window.Resources>
         <Style x:Key="AccentButton" TargetType="Button">
