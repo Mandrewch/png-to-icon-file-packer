@@ -97,6 +97,16 @@ public partial class MainWindow : Window
 
     private void ClearAll_Click(object sender, RoutedEventArgs e)
     {
+        ClearFileList();
+    }
+
+    private void ClearListButton_Click(object sender, RoutedEventArgs e)
+    {
+        ClearFileList();
+    }
+
+    private void ClearFileList()
+    {
         _pngFiles.Clear();
         RefreshFileList();
         StatusText.Text = "Cleared all files.";
@@ -151,6 +161,8 @@ public partial class MainWindow : Window
     {
         FileListBox.ItemsSource = null;
         FileListBox.ItemsSource = _pngFiles;
-        ConvertButton.IsEnabled = _pngFiles.Count > 0;
+        bool hasFiles = _pngFiles.Count > 0;
+        ConvertButton.IsEnabled = hasFiles;
+        ClearListButton.IsEnabled = hasFiles;
     }
 }
