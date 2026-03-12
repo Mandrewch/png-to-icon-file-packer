@@ -21,7 +21,7 @@ public partial class MainWindow : Window
         if (e.Data.GetDataPresent(DataFormats.FileDrop))
         {
             var files = (string[])e.Data.GetData(DataFormats.FileDrop)!;
-            bool hasAnyPng = files.Any(f => Path.GetExtension(f).Equals(".png", StringComparison.OrdinalIgnoreCase));
+            bool hasAnyPng = files.Any(f => IsImageFile(f));
             e.Effects = hasAnyPng ? DragDropEffects.Copy : DragDropEffects.None;
         }
         else
@@ -37,7 +37,7 @@ public partial class MainWindow : Window
             return;
 
         var files = (string[])e.Data.GetData(DataFormats.FileDrop)!;
-        var pngFiles = files.Where(f => Path.GetExtension(f).Equals(".png", StringComparison.OrdinalIgnoreCase));
+        var pngFiles = files.Where(f => IsImageFile(f));
 
         int added = 0;
         foreach (string file in pngFiles)
@@ -52,7 +52,7 @@ public partial class MainWindow : Window
         RefreshFileList();
         StatusText.Text = added > 0
             ? $"Added {added} file(s). {_pngFiles.Count} total."
-            : "No new PNG files to add (duplicates skipped).";
+            : "No new image files to add (duplicates skipped).";
     }
 
     // --- Browse Button ---
@@ -61,9 +61,9 @@ public partial class MainWindow : Window
     {
         var dialog = new OpenFileDialog
         {
-            Filter = "PNG Images (*.png)|*.png",
+            Filter = "Image Files (*.png;*.bmp)|*.png;*.bmp",
             Multiselect = true,
-            Title = "Select PNG files to convert"
+            Title = "Select PNG or BMP files to convert"
         };
 
         if (dialog.ShowDialog() != true)
@@ -156,6 +156,13 @@ public partial class MainWindow : Window
     }
 
     // --- Helpers ---
+
+    private static bool IsImageFile(string path)
+    {
+        var ext = Path.GetExtension(path);
+        return ext.Equals(".png", StringComparison.OrdinalIgnoreCase)
+            || ext.Equals(".bmp", StringComparison.OrdinalIgnoreCase);
+    }
 
     private void RefreshFileList()
     {

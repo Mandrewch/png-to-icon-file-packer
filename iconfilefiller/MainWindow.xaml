@@ -8,7 +8,7 @@
         AllowDrop="True"
         DragOver="Window_DragOver"
         Drop="Window_Drop"
-        Icon="appicon.ico">
+        Icon="pack://application:,,,/app.ico">
 
     <Window.Resources>
         <Style x:Key="AccentButton" TargetType="Button">
@@ -66,9 +66,9 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="&#xE8B7;" FontFamily="Segoe MDL2 Assets" FontSize="36"
                            HorizontalAlignment="Center" Foreground="#666" Margin="0,0,0,8"/>
-                <TextBlock Text="Drop PNG files here" FontSize="16" Foreground="#555"
+                <TextBlock Text="Drop PNG or BMP files here" FontSize="16" Foreground="#555"
                            HorizontalAlignment="Center"/>
-                <TextBlock Text="Multiple PNGs combine into one ICO" FontSize="12" Foreground="#999"
+                <TextBlock Text="Multiple images combine into one ICO" FontSize="12" Foreground="#999"
                            HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Border>
